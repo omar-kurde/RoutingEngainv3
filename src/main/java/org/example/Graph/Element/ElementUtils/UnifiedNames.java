@@ -23,6 +23,7 @@ public class UnifiedNames {
 
     private static final Map<String , PlaceCategory> places = new HashMap<>();
 
+
     static {
         places.put("RESTAURANT" , PlaceCategory.RESTAURANT);
         places.put("FAST_FOOD" , PlaceCategory.RESTAURANT);
