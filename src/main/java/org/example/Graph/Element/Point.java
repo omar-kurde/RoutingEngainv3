@@ -9,11 +9,11 @@ public class Point {
         this.lon = lon;
     }
 
-    public double GetLat() {
+    public double getLat() {
         return lat;
     }
 
-    public double GetLon() {
+    public double getLon() {
         return lon;
     }
 
