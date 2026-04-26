@@ -18,7 +18,7 @@ public class H3PlaceService {
     }
 
     public void addPlace(Place place) {
-        Long h3Index = h3Service.getIndex(place.getCenter().GetLat(), place.getCenter().GetLon() , RESOLUTION);
+        Long h3Index = h3Service.getIndex(place.getCenter().getLat(), place.getCenter().getLon() , RESOLUTION);
 //        System.out.println(h3Index);
         repo.save(new H3PlaceWrapper(h3Index, place));
     }

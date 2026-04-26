@@ -38,7 +38,7 @@ public class RPoint {
     }
 
     public double distance(Point point) {
-        return distance(new RPoint(point.GetLat(), point.GetLon()));
+        return distance(new RPoint(point.getLat(), point.getLon()));
     }
 
 

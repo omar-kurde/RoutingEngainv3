@@ -11,8 +11,8 @@ public class SpatialObjectUtil {
         double lat = 0;
         double lon = 0;
         for(Point point : points){
-            lat+=point.GetLat();
-            lon+=point.GetLon();
+            lat+=point.getLat();
+            lon+=point.getLon();
         }
         return new Point(lat/n , lon/n);
     }

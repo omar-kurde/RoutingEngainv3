@@ -14,9 +14,9 @@ public class Projection {
         return closestPointOnLine(A.getPoint(), B.getPoint(), p);
     }
     public static Point closestPointOnLine(Point A, Point B, Point P) {
-        Point a = new Point(latToMercator(A.GetLat()), lonToMercator(A.GetLon()));
-        Point b = new Point(latToMercator(B.GetLat()), lonToMercator(B.GetLon()));
-        Point p = new Point(latToMercator(P.GetLat()), lonToMercator(P.GetLon()));
+        Point a = new Point(latToMercator(A.getLat()), lonToMercator(A.getLon()));
+        Point b = new Point(latToMercator(B.getLat()), lonToMercator(B.getLon()));
+        Point p = new Point(latToMercator(P.getLat()), lonToMercator(P.getLon()));
 
 
         Point AB = subtract(b,a) ;//b.subtract(a);
@@ -32,7 +32,7 @@ public class Projection {
 
         Point a2 =  add(a,scale(AB,(t)));
 
-        return new Point(mercatorToLat(a2.GetLat() ) ,mercatorToLon(a2.GetLon()));
+        return new Point(mercatorToLat(a2.getLat() ) ,mercatorToLon(a2.getLon()));
     }
 
     public static Point closestPointOnLine(RPoint A, RPoint B, RPoint P) {
@@ -54,7 +54,7 @@ public class Projection {
 
         Point a2 =  add(a,scale(AB,(t)));
 
-        return new Point(mercatorToLat(a2.GetLat() ) ,mercatorToLon(a2.GetLon()));
+        return new Point(mercatorToLat(a2.getLat() ) ,mercatorToLon(a2.getLon()));
     }
 
 }

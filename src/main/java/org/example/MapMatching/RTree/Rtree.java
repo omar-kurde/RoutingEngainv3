@@ -5,7 +5,6 @@ import org.example.Graph.Element.Edge;
 import org.example.Graph.Element.Node;
 import org.example.Graph.Element.Point;
 import org.example.Graph.Graph.Graph;
-import org.example.Graph.Graph.NormalGraph;
 import org.example.MapMatching.NearestEdgeFinder;
 
 import java.util.ArrayList;
@@ -87,7 +86,7 @@ public class Rtree implements NearestEdgeFinder {
 
     @Override
     public Edge nearestEdge(Point point) {
-        REdge edge = (REdge) search(new RPoint(point.GetLat() , point.GetLon()));
+        REdge edge = (REdge) search(new RPoint(point.getLat() , point.getLon()));
         System.out.println(edge);
         return edge.getEdge();
     }

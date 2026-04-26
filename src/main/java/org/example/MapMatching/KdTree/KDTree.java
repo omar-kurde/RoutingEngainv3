@@ -133,7 +133,7 @@ public class KDTree implements NearestNodeFinder {
 
     @Override
     public Node nearestNode(Point point) {
-        KDNode kdNode = NearestNeighbor(root ,  new KDPoint(point.GetLat() , point.GetLon()) , null ,Double.MAX_VALUE , 0);
+        KDNode kdNode = NearestNeighbor(root ,  new KDPoint(point.getLat() , point.getLon()) , null ,Double.MAX_VALUE , 0);
         return kdNode.getNode();
     }
 }

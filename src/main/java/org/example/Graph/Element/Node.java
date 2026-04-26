@@ -60,11 +60,11 @@ public class Node {
 
 
     public Double getLat(){
-        return point.GetLat();
+        return point.getLat();
     }
 
     public Double getLon(){
-        return point.GetLon();
+        return point.getLon();
     }
 
     public Point getPoint(){

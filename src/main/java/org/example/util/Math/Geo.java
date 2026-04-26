@@ -24,7 +24,7 @@ public class Geo {
 
 
     public static Double GetEdgeCost(Point start, Point end) {
-        return GetEdgeCost(start.GetLat() , start.GetLon() , end.GetLat() , end.GetLon());
+        return GetEdgeCost(start.getLat() , start.getLon() , end.getLat() , end.getLon());
     }
     public static Double GetEdgeCost(Double lat1,Double lon1,Double lat2,Double lon2) {
         lat1 = Math.toRadians(lat1);
