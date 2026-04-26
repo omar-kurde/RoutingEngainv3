@@ -17,8 +17,6 @@ import org.example.ServiceResponse.RoutingPath;
 import org.example.Services.MapMatchingService;
 import org.example.Services.PlaceService;
 import org.example.Services.RoutingService;
-import org.example.util.Math.Projection;
-import org.locationtech.jts.index.kdtree.KdTree;
 
 import java.util.List;
 
