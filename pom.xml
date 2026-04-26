@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.example</groupId>
   <artifactId>RoutingEngainv3</artifactId>
-  <version>1.0</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>RoutingEngainv3</name>
@@ -12,7 +12,11 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <osm4j.version>1.4.1</osm4j.version>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
   </properties>
+
   <repositories>
     <repository>
       <id>topobyte-repo</id>
@@ -20,14 +24,15 @@
     </repository>
     <repository>
       <id>slimjars-repo</id>
-      <url>https://mvn.slimjars.com/releases</url>
+      <url>https://slimjars.com/maven/releases</url>
     </repository>
   </repositories>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
 
@@ -40,60 +45,51 @@
     <dependency>
       <groupId>de.topobyte</groupId>
       <artifactId>osm4j-core</artifactId>
-      <version>1.4.0</version>
+      <version>${osm4j.version}</version>
     </dependency>
 
     <dependency>
       <groupId>de.topobyte</groupId>
       <artifactId>osm4j-utils</artifactId>
-      <version>1.4.0</version>
+      <version>${osm4j.version}</version>
     </dependency>
 
     <dependency>
       <groupId>de.topobyte</groupId>
       <artifactId>osm4j-xml</artifactId>
-      <version>1.4.0</version>
+      <version>${osm4j.version}</version>
     </dependency>
 
     <dependency>
       <groupId>de.topobyte</groupId>
       <artifactId>osm4j-pbf</artifactId>
-      <version>1.4.0</version>
+      <version>${osm4j.version}</version>
     </dependency>
 
     <dependency>
       <groupId>de.topobyte</groupId>
       <artifactId>osm4j-tbo</artifactId>
-      <version>1.4.0</version>
+      <version>${osm4j.version}</version>
     </dependency>
 
     <dependency>
       <groupId>de.topobyte</groupId>
       <artifactId>osm4j-geometry</artifactId>
-      <version>1.4.0</version>
+      <version>${osm4j.version}</version>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>3.5.0</version>
-
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-          </execution>
-        </executions>
-
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <source>11</source>
+          <target>11</target>
+        </configuration>
       </plugin>
-
     </plugins>
   </build>
-
 </project>
