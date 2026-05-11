@@ -8,10 +8,10 @@ import org.example.Graph.Element.Way;
 import org.example.Graph.Graph.Graph;
 
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class WayProcessor {
-    public Way process(OsmWay way , Graph graph , AtomicLong counter , Map<Long,Long> offSet) {
+    public Way process(OsmWay way , Graph graph , AtomicInteger counter , Map<Long,Integer> offSet) {
         TLongList TempList   = new TLongArrayList(OsmModelUtil.nodesAsList(way));
 
         Map<String,String> tempTags  = OsmModelUtil.getTagsAsMap(way);
@@ -25,15 +25,15 @@ public class WayProcessor {
                 .build();
 
         for (int i = 0; i < TempList.size(); i++) {
-            Long id  = offSet.get(TempList.get(i));
+            int id  = offSet.get(TempList.get(i));
 
             newWay.addNode(id);
 
-            graph.NODES_LIST().get(id.intValue())
+            graph.NODES_LIST().get(id)
                         .setOnWay(isHighway);
 
-            graph.NODES_LIST().get(id.intValue())
-                    .addWay(counter.get());
+//            graph.NODES_LIST().get((int)id)
+//                    .addWay(counter.get());
         }
         counter.incrementAndGet();
         graph.addWay(newWay);

@@ -20,6 +20,7 @@ public class GraphBuilder {
     public void buildGraph() {
 
         for (Way way : graph.WAYS_LIST()){
+            if (!way.isHighWay())continue; // important
             String dir = way.getTag(CONSTANT.ONE_WAY);
             if (dir == null || dir.isEmpty() || dir.equals(CONSTANT.NO)) {
                 BidirectionalLinks(way);
@@ -37,30 +38,30 @@ public class GraphBuilder {
 
     public void ForwardLinks(Way way) {
         for (int idx = 0 ; idx < way.numberOFNodes()-1 ; idx++) {
-            ForwardEdge(way.getNode(idx) , way.getNode(idx+1) , way.getID());
+            ForwardEdge(way.getNode(idx) , way.getNode(idx+1) , way.getId());
         }
     }
 
     public void BackwardLinks(Way way) {
-        for (int idx = (way.numberOFNodes().intValue())-1 ; idx >0 ; idx--) {
-            ForwardEdge(way.getNode(idx) , way.getNode(idx-1), way.getID());
+        for (int idx = ((int)way.numberOFNodes())-1 ; idx >0 ; idx--) {
+            ForwardEdge(way.getNode(idx) , way.getNode(idx-1), way.getId());
         }
     }
 
     public void BidirectionalLinks(Way way) {
         for (int idx = 0 ; idx < way.numberOFNodes()-1 ; idx++) {
-            BidirectionalEdge(way.getNode(idx) , way.getNode(idx+1) , way.getID());
+            BidirectionalEdge(way.getNode(idx) , way.getNode(idx+1) , way.getId());
         }
     }
 
 
-    public void ForwardEdge(Long source , Long target,Long wayId) {
+    public void ForwardEdge(int source , int target,int wayId) {
         Edge edge = edgeProcessor.createEdge(graph.getNode(source) , graph.getNode(target) , graph.getWay(wayId), graph , graph.getEdgeCount());
         graph.addOutEdge(source, edge.getId());
-        graph.addOutEdge(target , edge.getId());
+        graph.addInEdge(target , edge.getId());
     }
 
-    public void BidirectionalEdge(Long source , Long target,Long WayId) {
+    public void BidirectionalEdge(int source , int target,int WayId) {
         ForwardEdge(source,target,WayId);
         ForwardEdge(target,source,WayId);
     }

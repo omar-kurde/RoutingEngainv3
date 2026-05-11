@@ -21,7 +21,7 @@ public class OsmLoader {
 
     }
 
-    public void LoadOsmData() throws IOException {
+    private void LoadOsmData() throws IOException {
         try {
             String filename = "OSM/jordan-260420.osm.pbf";
 //        InputStream input = new FileInputStream(filename);
@@ -29,7 +29,6 @@ public class OsmLoader {
 
             this.osmIterator = new PbfIterator(inputStream, true);
 
-//            new OsmXmlIterator(inputStream, true);
         }
         catch (Exception e) {
             e.printStackTrace();

@@ -1,17 +1,14 @@
 package org.example.Graph.Element;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Map;
 
 public class Node {
 
-    private  Long id;
+    private int id;
     private final Point point;
-    private final List<Long> inEdges = new ArrayList<>();
-    private final List<Long> outEdges = new ArrayList<>();
-    private final List<Long> myWays = new ArrayList<>();
-    private final Map<String,String> tags;
+//    private final intArrayList myWays = new intArrayList();
+    private  Map<String,String> tags;
     private boolean onWay = false;
 
 
@@ -20,23 +17,24 @@ public class Node {
 //        this.Lat = builder.Lat;
 //        this.Lon = builder.Lon;
         this.point = new Point(builder.Lat , builder.Lon);
-        this.tags = builder.tags;
+        if (!builder.tags.isEmpty())
+            this.tags = builder.tags;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     public static class Builder {
-        private Long id;
-        private Double Lat;
-        private Double Lon;
+        private int id;
+        private double Lat;
+        private double Lon;
         private Map<String,String> tags;
 
-        public Builder id(Long id) {
+        public Builder id(int id) {
             this.id = id;
             return this;
         }
@@ -59,11 +57,11 @@ public class Node {
     }
 
 
-    public Double getLat(){
+    public double getLat(){
         return point.getLat();
     }
 
-    public Double getLon(){
+    public double getLon(){
         return point.getLon();
     }
 
@@ -71,24 +69,17 @@ public class Node {
         return point;
     }
 
-    public void addWay(Long id){
-        myWays.add(id);
-    }
+//    public void addWay(int id){
+//        myWays.add(id);
+//    }
 
-    public List<Long> getInEdges(){
-        return inEdges;
-    }
 
-    public List<Long> getOutEdges(){
-        return outEdges;
-    }
-
-    public List<Long> getWays(){
-        return myWays;
-    }
+//    public intArrayList getWays(){
+//        return myWays;
+//    }
 
     public String getTag(String key){
-        if(tags.containsKey(key)){
+        if(tags!=null && tags.containsKey(key)){
             return tags.get(key);
         }
         return null;

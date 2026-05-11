@@ -14,7 +14,7 @@ class H3Service {
 
     }
 
-    public Long  getIndex(double lat, double lon , int resolution ) {
+    public long  getIndex(double lat, double lon , int resolution ) {
         return h3.latLngToCell(lat, lon, resolution);
     }
 

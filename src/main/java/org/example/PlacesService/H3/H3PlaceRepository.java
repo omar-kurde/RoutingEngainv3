@@ -16,10 +16,10 @@ class H3PlaceRepository {
         return h3CategoryMap;
     }
 
-    public Map<PlaceCategory , List<H3PlaceWrapper>> findByH3(Long h3Index) {
+    public Map<PlaceCategory , List<H3PlaceWrapper>> findByH3(long h3Index) {
         return h3CategoryMap.getOrDefault(h3Index, Collections.emptyMap());
     }
-    public List<H3PlaceWrapper> findByH3AndCategory(Long h3Index , PlaceCategory category) {
+    public List<H3PlaceWrapper> findByH3AndCategory(long h3Index , PlaceCategory category) {
 //        System.out.println(h3CategoryMap.getOrDefault(h3Index, Collections.emptyMap()));
 //        System.out.println(h3CategoryMap.getOrDefault(h3Index, Collections.emptyMap()).getOrDefault(category , new ArrayList<>()));
         return h3CategoryMap.getOrDefault(h3Index, Collections.emptyMap()).getOrDefault(category , new ArrayList<>());

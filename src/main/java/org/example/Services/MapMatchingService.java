@@ -4,10 +4,7 @@ import org.example.Graph.Element.Edge;
 import org.example.Graph.Element.Node;
 import org.example.Graph.Element.Point;
 import org.example.Graph.Graph.Graph;
-import org.example.MapMatching.KdTree.KDTree;
 import org.example.MapMatching.MapMatching;
-import org.example.MapMatching.MapMatchingStrategy;
-import org.example.MapMatching.RTree.Rtree;
 import org.example.ServiceRequest.MapMatchingResult;
 import org.example.util.Math.Projection;
 
@@ -24,11 +21,11 @@ public class MapMatchingService {
     }
     public MapMatchingResult MatchToEdge(Point point) {
         Edge edge =  strategy.nearestEdge(point);
-       MapMatchingResult result =  new MapMatchingResult();
-       result.setEdge(edge);
-       result.setRealPoint(point);
-       Point matchedPoint = Projection.closestPointOnLine(graph.getNode(edge.getHeadId()) , graph.getNode(edge.getTailId()) , point);
-       result.setMapPoint(matchedPoint);
+        MapMatchingResult result =  new MapMatchingResult();
+        result.setEdge(edge);
+        result.setRealPoint(point);
+        Point matchedPoint = Projection.closestPointOnLine(graph.getNode(edge.getHeadId()) , graph.getNode(edge.getTailId()) , point);
+        result.setMapPoint(matchedPoint);
        return result;
     }
 

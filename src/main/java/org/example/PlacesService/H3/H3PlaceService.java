@@ -18,7 +18,7 @@ public class H3PlaceService {
     }
 
     public void addPlace(Place place) {
-        Long h3Index = h3Service.getIndex(place.getCenter().getLat(), place.getCenter().getLon() , RESOLUTION);
+        long h3Index = h3Service.getIndex(place.getCenter().getLat(), place.getCenter().getLon() , RESOLUTION);
 //        System.out.println(h3Index);
         repo.save(new H3PlaceWrapper(h3Index, place));
     }
@@ -33,7 +33,7 @@ public class H3PlaceService {
 
     public List<H3PlaceWrapper> getNearby(double lat, double lon , PlaceCategory category) {
 //        System.out.println(repo.getH3CategoryMap());
-        Long center = h3Service.getIndex(lat, lon, RESOLUTION);
+        long center = h3Service.getIndex(lat, lon, RESOLUTION);
 
 
 //        System.out.println(center);
@@ -42,7 +42,7 @@ public class H3PlaceService {
 //        System.out.println(neighbors);
         List<H3PlaceWrapper> result = new ArrayList<>();
 
-        for (Long cell : neighbors) {
+        for (long cell : neighbors) {
             result.addAll(repo.findByH3AndCategory(cell , category));
         }
 

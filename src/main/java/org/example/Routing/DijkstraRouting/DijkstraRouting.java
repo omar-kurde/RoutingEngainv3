@@ -12,29 +12,29 @@ import java.util.*;
 public class DijkstraRouting implements Routing {
 
     @Override
-    public RoutingPath shortestPath(Long sorces , Long target , Graph graph) {
-        HashSet<Long> visited = new HashSet<>();
-        HashMap<Long,Long> parents = new HashMap<>();
-        HashMap<Long,Double> distances = new HashMap<>();
-        PriorityQueue<Long> Queue = new PriorityQueue<>(Comparator.comparingDouble(distances::get));
+    public RoutingPath shortestPath(int sorces , int target , Graph graph) {
+        HashSet<Integer> visited = new HashSet<>();
+        HashMap<Integer,Integer> parents = new HashMap<>();
+        HashMap<Integer,Double> distances = new HashMap<>();
+        PriorityQueue<Integer> Queue = new PriorityQueue<>(Comparator.comparingDouble(distances::get));
 
         Queue.add(sorces);
         distances.put(sorces,0.0);
 
         while (!Queue.isEmpty()) {
-            Long Current = Queue.poll();
+            int Current = Queue.poll();
 
             if (visited.contains(Current)) {
                 continue;
             }
             visited.add(Current);
-            if (Current.equals(target)) {
+            if (Current == target) {
                 break;
             }
             Double cost = distances.get(Current);
 
 
-            for (Long nextEdge : graph.nextEdges(Current)) {
+            for (int nextEdge : graph.nextEdges(Current)) {
                 Edge edge = graph.getEdge(nextEdge);
                 if (visited.contains(edge.getTailId())) {
                     continue;
@@ -53,10 +53,10 @@ public class DijkstraRouting implements Routing {
 //        System.out.println(target);
 //        System.out.println(distances.size());
         path.setDistance(distances.get(target));
-        Long id=target;
+        int id=target;
         Node targetNode = graph.getNode(id);
         path.addPathNode(new PathNode(id , targetNode.getLat() , targetNode.getLon()  , 0));
-        while (!id.equals(sorces)) {
+        while (!(id==sorces)) {
             id=parents.get(id);
             path.addPathNode(new PathNode(id , graph.getNode(id).getLat() , graph.getNode(id).getLon()  , 0));
         }

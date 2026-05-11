@@ -112,7 +112,7 @@ public class branch implements RNode{
     }
 
     @Override
-    public SpatialObject search(RPoint point ,DoubleRef dis,Double d){
+    public SpatialObject search(RPoint point ,DoubleRef dis,double d){
         List<RNode> temp = new ArrayList<>(this.children);
         temp.sort(Comparator.comparingDouble(o -> o.getMBR().distance(point)));
         SpatialObject best = null;

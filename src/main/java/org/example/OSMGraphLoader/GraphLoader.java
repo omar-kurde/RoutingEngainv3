@@ -15,10 +15,8 @@ public class GraphLoader {
     private OsmProcessor osmProcessor;
     public Graph loadGraph() throws IOException {
         try {
-            osmLoader.LoadOsmData();
             osmLoader.init();
             Graph graph = new NormalGraph();
-//            osmIterator = osmLoader.getOsmIterator();
             osmProcessor = new OsmProcessor(osmLoader.getOsmIterator(), graph);
             osmProcessor.process();
             osmLoader.closeStream();

@@ -24,7 +24,7 @@ public class BruteForceMatcher implements NearestEdgeFinder , NearestNodeFinder 
         for (Node node : graph.NODES_LIST()){
             if (!node.isOnWay()) continue;
             Point nodePoint = node.getPoint();
-            Double cost = GetEdgeCost(point , nodePoint);
+            double cost = GetEdgeCost(point , nodePoint);
             if (cost < minDistance){
                 minDistance = GetEdgeCost(point , nodePoint);
                 nearestNode = node;
@@ -35,7 +35,7 @@ public class BruteForceMatcher implements NearestEdgeFinder , NearestNodeFinder 
 
     @Override
     public Edge nearestEdge(Point point) {
-        Double MinDis = 1e9;
+        double MinDis = 1e9;
         Edge nearestEdge = null;
 
         for (Edge edge : graph.EDGES_LIST()){
@@ -45,7 +45,7 @@ public class BruteForceMatcher implements NearestEdgeFinder , NearestNodeFinder 
                     graph.getNode(edge.getTailId()) ,
                     point
             );
-            Double curCost = GetEdgeCost(point , curPoint);
+            double curCost = GetEdgeCost(point , curPoint);
             if (curCost < MinDis) {
                 MinDis = curCost;
                 nearestEdge = edge;

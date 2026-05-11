@@ -11,23 +11,18 @@ import java.util.Arrays;
 import java.util.List;
 
 public class KDTree implements NearestNodeFinder {
-    List<KDNode> KdNodes;
-    List<KDNode> Xkey , Ykey;
     int dimension=2;
     private final Graph graph;
     private KDNode root;
 
     public KDTree(Graph graph) {
         this.graph = graph;
-        Xkey = new ArrayList<>();
-        Ykey = new ArrayList<>();
-        KdNodes = new ArrayList<>();
     }
 
     public void init(){
-        Xkey = new ArrayList<>();
-        Ykey = new ArrayList<>();
-        KdNodes = new ArrayList<>();
+        List<KDNode> Xkey = new ArrayList<>();
+        List<KDNode> Ykey = new ArrayList<>();
+        List<KDNode> KdNodes = new ArrayList<>();
         for (Node node : graph.NODES_LIST()){
             if (!node.isOnWay()){
                 continue;
@@ -76,10 +71,10 @@ public class KDTree implements NearestNodeFinder {
 
     }
 
-    private KDNode NearestNeighbor(KDNode curnode ,KDPoint query , KDNode best , Double bestDistance , int depth ){
+    private KDNode NearestNeighbor(KDNode curnode ,KDPoint query , KDNode best , double bestDistance , int depth ){
         if (curnode == null)  return best;
 
-        Double curDistance = Geo.GetEdgeCost(
+        double curDistance = Geo.GetEdgeCost(
                 query.getAxis(0),
                 query.getAxis(1),
                 curnode.getPoint().getAxis(0),

@@ -9,7 +9,7 @@ public class REdge implements SpatialObject{
     private Edge edge ;
     private final RPoint start;
     private final RPoint end;
-//    Long WayId;
+//    int WayId;
 
     REdge(Edge edge, RPoint r1, RPoint r2) {
         this.edge = edge;
@@ -20,23 +20,23 @@ public class REdge implements SpatialObject{
         return edge.isOneWay();
     }
 
-    public Long getWayId() {
+    public int getWayId() {
         return edge.getWayId();
     }
 
-    public Double getWight() {
+    public double getWight() {
         return edge.getWight();
     }
 
-    public Long getStartNodeId() {
+    public int getStartNodeId() {
         return edge.getTailId();
     }
 
-    public Long GetEndNodeId() {
+    public int GetEndNodeId() {
         return edge.getHeadId();
     }
 
-    public Long getId() {
+    public int getId() {
         return edge.getId();
     }
 

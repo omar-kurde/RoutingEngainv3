@@ -1,35 +1,37 @@
 package org.example.Graph.Element;
 
-import java.util.ArrayList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+
 import java.util.List;
 import java.util.Map;
 
 public class Way {
-    private  Long id;
-    private final List<Long> nodes = new ArrayList<>();
-//    private final List<Long> myEdges = new ArrayList<>();
-    private final Map<String,String> tags;
+    private  int id;
+    private final IntArrayList nodes = new IntArrayList();
+//    private final List<long> myEdges = new ArrayList<>();
+    private Map<String,String> tags;
     private final boolean oneWay;
     private final boolean isHighWay;
 
     private Way(Builder builder) {
         this.id = builder.id;
-        this.tags = builder.tags;
+        if (!builder.tags.isEmpty())
+            this.tags = builder.tags;
         this.oneWay = builder.oneWay;
         this.isHighWay = builder.isHighWay;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     public static class Builder {
-        private Long id;
+        private int id;
         private Map<String,String> tags;
         private boolean oneWay = false;
         private boolean isHighWay = false;
 
-        public Builder id(Long id) {
+        public Builder id(int id) {
             this.id=id;
             return this;
         }
@@ -52,7 +54,7 @@ public class Way {
 
     }
 
-    public Long getID(){
+    public int getId(){
         return id;
     }
 
@@ -61,13 +63,13 @@ public class Way {
     }
 
     public String getTag(String key){
-        if(tags.containsKey(key)){
+        if(tags!=null && tags.containsKey(key)){
             return tags.get(key);
         }
         return null;
     }
-    public Long numberOFNodes(){
-        return (long) nodes.size();
+    public int numberOFNodes(){
+        return  nodes.size();
     }
 
 
@@ -78,24 +80,24 @@ public class Way {
         return isHighWay;
     }
 
-    public void addNode(Long id){
+    public void addNode(int id){
         nodes.add(id);
     }
 
-//    public void AddEdge(Long id){
+//    public void AddEdge(int id){
 //        myEdges.add(id);
 //    }
 
-    public Long getNode(int idx){
-        return nodes.get(idx);
+    public int getNode(int idx){
+        return nodes.get(idx).intValue();
     }
-//    public Long getEdge(int idx){
+//    public int getEdge(int idx){
 //        return myEdges.get(idx);
 //    }
-    public List<Long> getNodes(){
+    public IntArrayList getNodes(){
         return nodes;
     }
-//    public List<Long> getEdges(){
+//    public List<long> getEdges(){
 //        return myEdges;
 //    }
 

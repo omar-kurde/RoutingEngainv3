@@ -3,7 +3,7 @@ package org.example.MapMatching.KdTree;
 import org.example.Graph.Element.Node;
 
 public class KDNode implements Comparable<KDNode> {
-    private Long id;
+    private int id;
     private KDPoint point;
     private KDNode left , right;
     private Node node;
@@ -15,10 +15,10 @@ public class KDNode implements Comparable<KDNode> {
         this.node = node;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
-    public Long getId() {
+    public int getId() {
         return id;
     }
 

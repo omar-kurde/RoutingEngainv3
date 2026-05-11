@@ -1,21 +1,21 @@
 package org.example.MapMatching.KdTree;
 
 public class KDPoint implements Comparable<KDPoint> {
-    Double[] coordinates;
+    double[] coordinates;
 
 
-    public KDPoint(Double... coordinates) {
+    public KDPoint(double... coordinates) {
         this.coordinates = coordinates;
     }
 
-    public Double getAxis(int axis) {
+    public double getAxis(int axis) {
         return coordinates[axis];
     }
 
-    public Double distance(KDPoint other) {
-        Double sum = 0D;
+    public double distance(KDPoint other) {
+        double sum = 0D;
         for (int i = 0; i < coordinates.length; i++) {
-            Double diff = coordinates[i] - other.coordinates[i];
+            double diff = coordinates[i] - other.coordinates[i];
             sum += diff * diff;
         }
         return sum;

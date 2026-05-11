@@ -1,13 +1,13 @@
 package org.example.Graph.Element;
 
 public class Edge {
-    private  Long id;
-    private final Long wayId;
-    private final Long headId;
-    private final Long tailId;
+    private  int id;
+    private final int wayId;
+    private final int headId;
+    private final int tailId;
     private final boolean isHighWay;
     private final boolean oneWay ;
-    private final Double weight;
+    private final double weight;
 
 
     private Edge(Builder builder){
@@ -20,37 +20,37 @@ public class Edge {
         this.oneWay = builder.oneWay;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     public static class  Builder{
-        private Long id;
-        private Long wayId;
-        private Long headId;
-        private Long tailId;
+        private int id;
+        private int wayId;
+        private int headId;
+        private int tailId;
         private boolean oneWay= false ;
         private boolean isHighWay = false ;
 
-        Double weight;
+        double weight;
 
-        public Builder id(Long id) {
+        public Builder id(int id) {
             this.id = id;
             return this;
         }
-        public Builder wayId(Long wayId) {
+        public Builder wayId(int wayId) {
             this.wayId = wayId;
             return this;
         }
-        public Builder HeadId(Long startId) {
+        public Builder HeadId(int startId) {
             this.headId = startId;
             return this;
         }
-        public Builder tailId(Long endId) {
+        public Builder tailId(int endId) {
             this.tailId = endId;
             return this;
         }
-        public Builder weight(Double weight) {
+        public Builder weight(double weight) {
             this.weight = weight;
             return this;
         }
@@ -68,22 +68,22 @@ public class Edge {
 
     }
 
-    public Long getWayId(){
+    public int getWayId(){
         return this.wayId;
     }
-    public Double getWight()
+    public double getWight()
     {
 //        if (this.weight==null)
         return this.weight;
     }
-    public Long getId(){
+    public int getId(){
         return this.id;
     }
-    public Long getHeadId(){
+    public int getHeadId(){
         return this.headId;
     }
 
-    public Long getTailId(){
+    public int getTailId(){
         return this.tailId;
     }
     public boolean isOneWay(){

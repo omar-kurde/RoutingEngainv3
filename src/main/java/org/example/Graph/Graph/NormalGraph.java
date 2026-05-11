@@ -1,5 +1,6 @@
 package org.example.Graph.Graph;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import org.example.Graph.Element.Edge;
 import org.example.Graph.Element.Node;
 import org.example.Graph.Element.Place;
@@ -9,18 +10,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class NormalGraph implements Graph {
     private final List<Node> nodes;
     private final List<Way> ways;
     private final List<Edge> edges;
     private final List<Place> places;
-    private Map<Long, List<Long>> nextEdges;
-    private Map<Long, List<Long>> prevEdges;
-    private final AtomicLong nodeCount = new AtomicLong(0);
-    private final AtomicLong wayCount = new AtomicLong(0);
-    private final AtomicLong edgeCount = new AtomicLong(0);
+    private Map<Integer, IntArrayList> nextEdges;
+    private Map<Integer, IntArrayList> prevEdges;
+    private final AtomicInteger nodeCount = new AtomicInteger(0);
+    private final AtomicInteger wayCount = new AtomicInteger(0);
+    private final AtomicInteger edgeCount = new AtomicInteger(0);
     // edge , node  ,  i will create fake next nodes and fake next edges so this good ayayyayaay
     public NormalGraph() {
         this.nodes = new ArrayList<>();
@@ -41,12 +42,12 @@ public class NormalGraph implements Graph {
     }
 
     @Override
-    public Map<Long, List<Long>> NEXT_EDGES_LIST() {
+    public Map<Integer, IntArrayList> NEXT_EDGES_LIST() {
         return this.nextEdges;
     }
 
     @Override
-    public Map<Long, List<Long>> PREV_EDGES_LIST() {
+    public Map<Integer , IntArrayList> PREV_EDGES_LIST() {
         return this.prevEdges;
     }
 
@@ -56,17 +57,17 @@ public class NormalGraph implements Graph {
     }
 
     @Override
-    public AtomicLong getNodeCount() {
+    public AtomicInteger getNodeCount() {
         return nodeCount;
     }
 
     @Override
-    public AtomicLong getEdgeCount() {
+    public AtomicInteger getEdgeCount() {
         return wayCount;
     }
 
     @Override
-    public AtomicLong getWayCount() {
+    public AtomicInteger getWayCount() {
         return edgeCount;
     }
 
@@ -77,59 +78,59 @@ public class NormalGraph implements Graph {
 
 
     @Override
-    public List<Long> prevEdges(Long nodeId) {
+    public IntArrayList prevEdges(int nodeId) {
         if (nodeId>=this.NODES_LIST().size() || nodeId<0)  {
-            return new ArrayList<>();
+            return new IntArrayList();
         }
-        return this.prevEdges.getOrDefault(nodeId , new ArrayList<>());
+        return this.prevEdges.getOrDefault(nodeId , new IntArrayList());
     }
 
     @Override
-    public List<Long> nextEdges(Long nodeId) {
+    public IntArrayList nextEdges(int nodeId) {
         if (nodeId>=this.NODES_LIST().size()  || nodeId<0 ) {
-            return new ArrayList<>();
+            return new IntArrayList();
         }
-        return this.nextEdges.getOrDefault(nodeId , new ArrayList<>());
+        return this.nextEdges.getOrDefault(nodeId , new IntArrayList());
     }
 
     @Override
-    public List<Long> nextNodes(Long nodeid) {
-        List<Long> nextnodes  = new ArrayList<>();
+    public IntArrayList nextNodes(int nodeid) {
+        IntArrayList nextnodes  = new IntArrayList();
         if (nodeid>=this.NODES_LIST().size() || nodeid<0) {
             return nextnodes;
         }
-        for (Long edge : this.nextEdges(nodeid)) {
-            nextnodes.add(this.edges.get(edge.intValue()).getTailId());
+        for (int edge : this.nextEdges(nodeid)) {
+            nextnodes.add(this.edges.get((int)edge).getTailId());
         }
         return nextnodes;
     }
     @Override
-    public List<Long> prevNodes(Long nodeid){
+    public IntArrayList prevNodes(int nodeid){
 
-        List<Long> prevnodes = new ArrayList<>();
+        IntArrayList prevnodes = new IntArrayList();
         if (nodeid>=this.NODES_LIST().size() || nodeid<0) {
             return prevnodes;
         }
-        for (Long edge : this.prevEdges(nodeid)) {
-            prevnodes.add(this.edges.get(edge.intValue()).getHeadId());
+        for (int edge : this.prevEdges(nodeid)) {
+            prevnodes.add(this.edges.get((int)edge).getHeadId());
         }
         return prevnodes;
     }
 
 
     @Override
-    public Node getNode(Long id){
+    public Node getNode(int id){
 
-        return nodes.get(id.intValue());
+        return nodes.get((int)id);
     }
     @Override
-    public Edge getEdge(Long id){
-        return edges.get(id.intValue());
+    public Edge getEdge(int id){
+        return edges.get((int)id);
     }
 
     @Override
-    public Way getWay(Long id) {
-        return ways.get(id.intValue());
+    public Way getWay(int id) {
+        return ways.get((int)id);
     }
 
     @Override
@@ -153,12 +154,12 @@ public class NormalGraph implements Graph {
     }
 
     @Override
-    public void addOutEdge(Long nodeId, Long edgeId) {
-        this.nextEdges.computeIfAbsent(nodeId, k->new ArrayList<>()).add(edgeId);
+    public void addOutEdge(int nodeId, int edgeId) {
+        this.nextEdges.computeIfAbsent(nodeId, k->new IntArrayList()).add(edgeId);
     }
 
     @Override
-    public void addInEdge(Long nodeId, Long edgeId) {
-        this.prevEdges.computeIfAbsent(nodeId, k->new ArrayList<>()).add(edgeId);
+    public void addInEdge(int nodeId, int edgeId) {
+        this.prevEdges.computeIfAbsent(nodeId, k->new IntArrayList()).add(edgeId);
     }
 }

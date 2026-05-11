@@ -1,5 +1,6 @@
 package org.example.Graph.Graph;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import org.example.Graph.Element.Edge;
 import org.example.Graph.Element.Node;
 import org.example.Graph.Element.Place;
@@ -7,35 +8,35 @@ import org.example.Graph.Element.Way;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public interface Graph {
      List<Node> NODES_LIST();
      List<Edge> EDGES_LIST();
      List<Way> WAYS_LIST();
-     Map<Long ,List<Long>> NEXT_EDGES_LIST();
-     Map<Long ,List<Long>> PREV_EDGES_LIST();
+     Map<Integer , IntArrayList> NEXT_EDGES_LIST();
+     Map<Integer, IntArrayList> PREV_EDGES_LIST();
 
-    List<Place> PLACES_LIST();
-     AtomicLong getNodeCount();
-     AtomicLong getEdgeCount();
-     AtomicLong getWayCount();
-     Node getNode(Long id);
-     Edge getEdge(Long id);
-     Way getWay(Long id);
+     List<Place> PLACES_LIST();
+     AtomicInteger getNodeCount();
+     AtomicInteger getEdgeCount();
+     AtomicInteger getWayCount();
+     Node getNode(int id);
+     Edge getEdge(int id);
+     Way getWay(int id);
      void addNode(Node node);
      void addPlace(Place place);
      void addEdge(Edge edge);
      void addWay(Way way);
-//     void addNextNode(Long nodeId , Long nextNodeId);
-//     void addPrevNode(Long nodeId , Long nextNodeId);
-     void addOutEdge(Long nodeId , Long edgeId);
-     void addInEdge(Long nodeId , Long edgeId);
+//     void addNextNode(int nodeId , int nextNodeId);
+//     void addPrevNode(int nodeId , int nextNodeId);
+     void addOutEdge(int nodeId , int edgeId);
+     void addInEdge(int nodeId , int edgeId);
 
 
-
-    List<Long> nextEdges(Long nodeId);
-     List<Long> nextNodes(Long nodeId);
-     List<Long> prevEdges(Long nodeId);
-     List<Long> prevNodes(Long nodeId);
+     IntArrayList nextEdges(int nodeId);
+     IntArrayList nextNodes(int nodeId);
+     IntArrayList prevEdges(int nodeId);
+     IntArrayList prevNodes(int nodeId);
 }

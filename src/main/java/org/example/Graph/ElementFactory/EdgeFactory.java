@@ -6,7 +6,6 @@ import org.example.Graph.Element.Way;
 import org.example.Graph.Graph.Graph;
 import org.example.util.Math.Geo;
 
-import java.util.concurrent.atomic.AtomicLong;
 
 public class EdgeFactory {
 
@@ -27,11 +26,11 @@ public class EdgeFactory {
 //        return newEdge;
 //    }
 
-    private static Double getCost(Node source  , Node target){
-        Double lat1 = source.getLat();
-        Double lon1 = source.getLon();
-        Double lat2 = target.getLat();
-        Double lon2 = target.getLon();
+    private static double getCost(Node source  , Node target){
+        double lat1 = source.getLat();
+        double lon1 = source.getLon();
+        double lat2 = target.getLat();
+        double lon2 = target.getLon();
         return Geo.GetEdgeCost(lat1, lon1, lat2, lon2);
     }
 

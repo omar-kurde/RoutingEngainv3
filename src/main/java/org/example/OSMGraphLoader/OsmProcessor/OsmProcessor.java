@@ -20,17 +20,15 @@ public class OsmProcessor {
     private final Graph graph;
     private final OsmIterator osmIterator;
 
-//    private final AtomicLong nodeCount = new AtomicLong(0);
-//    private final AtomicLong wayCount = new AtomicLong(0);
-//    private final AtomicLong edgeCount = new AtomicLong(0);
 
-    private final Map<Long, Long> offSet  = new HashMap<>();
+    private  Map<Long, Integer> offSet;
 
     NodeProcessor nodeProcessor = new NodeProcessor();
     WayProcessor wayProcessor = new WayProcessor();
     PlacesProcessor placesProcessor = new PlacesProcessor();
 
     public OsmProcessor(OsmIterator osmIterator , Graph graph) {
+        offSet = new HashMap<>();
         this.osmIterator = osmIterator;
         this.graph = graph;
     }
@@ -50,8 +48,8 @@ public class OsmProcessor {
                 Way newWay = wayProcessor.process(way , graph , graph.getWayCount() , offSet);
                 placesProcessor.process(newWay , graph);
             }
-
         }
+        offSet = null;
         System.out.println("Number of nodes: " + graph.getNodeCount().get());
     }
 }

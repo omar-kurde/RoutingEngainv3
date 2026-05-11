@@ -4,5 +4,5 @@ import org.example.Graph.Graph.Graph;
 import org.example.ServiceResponse.RoutingPath;
 
 public interface Routing {
-    RoutingPath shortestPath(Long source , Long target , Graph graph);
+    RoutingPath shortestPath(int source , int target , Graph graph);
 }

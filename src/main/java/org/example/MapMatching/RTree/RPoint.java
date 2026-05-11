@@ -4,7 +4,8 @@ import org.example.Graph.Element.Node;
 import org.example.Graph.Element.Point;
 
 public class RPoint {
-    private double Lat, Lon;
+    private final double Lat;
+    private final double Lon;
     public RPoint(double Lat, double Lon) {
         this.Lat = Lat;
         this.Lon = Lon;

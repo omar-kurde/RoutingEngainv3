@@ -10,7 +10,7 @@ public interface RNode extends SpatialObject {
 
     RNode insert(SpatialObject spatialObject);
     SpatialObject search(RPoint point , DoubleRef dis);
-    SpatialObject search(RPoint point ,DoubleRef dis , Double mn);
+    SpatialObject search(RPoint point ,DoubleRef dis , double mn);
     void SetParent(RNode parent);
 
 }

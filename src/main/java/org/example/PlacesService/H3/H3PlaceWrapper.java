@@ -7,9 +7,9 @@ import org.example.Graph.Element.Point;
 import java.util.List;
 
 public class H3PlaceWrapper {
-    private Long h3Index;
+    private long h3Index;
     private Place place;
-    public H3PlaceWrapper(Long h3Index, Place place) {
+    public H3PlaceWrapper(long h3Index, Place place) {
         this.h3Index = h3Index;
         this.place = place;
     }
@@ -17,7 +17,7 @@ public class H3PlaceWrapper {
     public Place getPlace() {
         return place;
     }
-    public Long getH3Index() {
+    public long getH3Index() {
         return h3Index;
     }
 

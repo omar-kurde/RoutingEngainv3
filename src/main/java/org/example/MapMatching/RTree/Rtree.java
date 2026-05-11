@@ -15,7 +15,7 @@ public class Rtree implements NearestEdgeFinder {
     private RNode root;
     private final Graph graph;
     private final REdgeFactory redgeFactory;
-    private final int Min = 2 , Max =4;
+    private final int Min = 8 , Max =16;
     public Rtree(Graph graph) {
         this.graph = graph;
         this.redgeFactory = new REdgeFactory(graph);
@@ -27,7 +27,7 @@ public class Rtree implements NearestEdgeFinder {
             if (!node.isOnWay()){
                 continue;
             }
-            for (Long NextEdge : graph.nextEdges(node.getId())){
+            for (int NextEdge : graph.nextEdges(node.getId())){
                 Edge edge = graph.getEdge(NextEdge);
                 SpatialObject street = redgeFactory.create(edge);
                 spatialObjects.add(street);
@@ -60,20 +60,20 @@ public class Rtree implements NearestEdgeFinder {
         return search(point,dis , 0D);
     }
 
-    protected SpatialObject search(RPoint point , DoubleRef dis , Double mn) {
+    protected SpatialObject search(RPoint point , DoubleRef dis , double mn) {
         return root.search(point,dis ,mn);
     }
 
 //    @Override
-//    public Long ClosestNode(Double lat1 , Double lon1, Graph graph2){
+//    public int ClosestNode(double lat1 , double lon1, Graph graph2){
 //        REdge edge = (REdge) search(new RPoint(lat1 , lon1));
 //        RPoint p = (RPoint) closestPointOnLine(edge.start,  edge.end, new RPoint(lat1 , lon1));
-//        Long id=graph2.AddNode((REdge) edge, p);
+//        int id=graph2.AddNode((REdge) edge, p);
 //        return id;
 //    }
-    public List<REdge> ClosestEdges(Double lat1, Double lon1, int count){
+    public List<REdge> ClosestEdges(double lat1, double lon1, int count){
         DoubleRef mx = new DoubleRef(Double.MAX_VALUE);
-        Double mn=0D;
+        double mn=0D;
         List<REdge> l =new ArrayList<>();
         for (int i=1;i<=count;i++){
             l.add((REdge) search(new RPoint(lat1 , lon1) , mx , mn));
