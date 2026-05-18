@@ -2,10 +2,7 @@ package org.example.Graph.Graph;
 
 
 import it.unimi.dsi.fastutil.ints.IntArrayList;
-import org.example.Graph.Element.Edge;
-import org.example.Graph.Element.Node;
-import org.example.Graph.Element.Place;
-import org.example.Graph.Element.Way;
+import org.example.Graph.Element.*;
 import org.example.util.utilObjects.ExtendingList;
 import org.example.util.utilObjects.ExtendingMap;
 
@@ -19,6 +16,7 @@ public class TempGraph implements Graph {
     private final List<Way> ways;
     private final List<Edge> edges;
     private final List<Place> places;
+    private final List<Zone> zones;
     private Map<Integer, IntArrayList> virtualNextEdges;
     private Map<Integer, IntArrayList> virtualPrevEdges;
 
@@ -32,9 +30,11 @@ public class TempGraph implements Graph {
         nodes = new ExtendingList<>(graph.NODES_LIST());
         ways = new ExtendingList<>(graph.WAYS_LIST());
         edges = new ExtendingList<>(graph.EDGES_LIST());
+        places = new ExtendingList<>(graph.PLACES_LIST());
+        zones = new ExtendingList<>(graph.ZONES_LIST());
+
         virtualNextEdges = new ExtendingMap<>(graph.NEXT_EDGES_LIST());
         virtualPrevEdges = new ExtendingMap<>(graph.PREV_EDGES_LIST());
-        places = new ExtendingList<>(graph.PLACES_LIST());
         nodeCount = new AtomicInteger(graph.getNodeCount().get());
         wayCount = new AtomicInteger(graph.getWayCount().get());
         edgeCount = new AtomicInteger(graph.getEdgeCount().get());
@@ -46,8 +46,23 @@ public class TempGraph implements Graph {
         return this.nodes;
     }
     @Override
+    public List<Edge> EDGES_LIST(){
+        return this.edges;
+    }
+
+    @Override
     public List<Way> WAYS_LIST() {
         return this.ways;
+    }
+
+    @Override
+    public List<Place> PLACES_LIST() {
+        return places;
+    }
+
+    @Override
+    public List<Zone> ZONES_LIST() {
+        return zones;
     }
 
     @Override
@@ -58,11 +73,6 @@ public class TempGraph implements Graph {
     @Override
     public Map<Integer, IntArrayList> PREV_EDGES_LIST() {
         return this.virtualPrevEdges;
-    }
-
-    @Override
-    public List<Place> PLACES_LIST() {
-        return places;
     }
 
     @Override
@@ -78,11 +88,6 @@ public class TempGraph implements Graph {
     @Override
     public AtomicInteger getWayCount() {
         return wayCount;
-    }
-
-    @Override
-    public List<Edge> EDGES_LIST(){
-        return this.edges;
     }
 
 
@@ -164,6 +169,11 @@ public class TempGraph implements Graph {
     @Override
     public void addWay(Way way) {
         ways.add(way);
+    }
+
+    @Override
+    public void addZone(Zone zone) {
+        this.zones.add(zone);
     }
 
     @Override

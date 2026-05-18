@@ -17,7 +17,7 @@ public class Node {
 //        this.Lat = builder.Lat;
 //        this.Lon = builder.Lon;
         this.point = new Point(builder.Lat , builder.Lon);
-        if (!builder.tags.isEmpty())
+        if (builder.tags!=null && !builder.tags.isEmpty())
             this.tags = builder.tags;
     }
 

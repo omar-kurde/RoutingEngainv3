@@ -1,10 +1,7 @@
 package org.example.Graph.Graph;
 
 import it.unimi.dsi.fastutil.ints.IntArrayList;
-import org.example.Graph.Element.Edge;
-import org.example.Graph.Element.Node;
-import org.example.Graph.Element.Place;
-import org.example.Graph.Element.Way;
+import org.example.Graph.Element.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +14,7 @@ public class NormalGraph implements Graph {
     private final List<Way> ways;
     private final List<Edge> edges;
     private final List<Place> places;
+    private final List<Zone> zones;
     private Map<Integer, IntArrayList> nextEdges;
     private Map<Integer, IntArrayList> prevEdges;
     private final AtomicInteger nodeCount = new AtomicInteger(0);
@@ -27,9 +25,10 @@ public class NormalGraph implements Graph {
         this.nodes = new ArrayList<>();
         this.edges = new ArrayList<>();
         this.ways = new ArrayList<>();
+        this.places = new ArrayList<>();
+        this.zones = new ArrayList<>();
         this.nextEdges = new HashMap<>();
         this.prevEdges = new HashMap<>();
-        this.places = new ArrayList<>();
     }
 
     @Override
@@ -37,10 +36,23 @@ public class NormalGraph implements Graph {
         return this.nodes;
     }
     @Override
+    public List<Edge> EDGES_LIST(){
+        return this.edges;
+    }
+
+    @Override
     public List<Way> WAYS_LIST() {
         return this.ways;
     }
+    @Override
+    public List<Place> PLACES_LIST() {
+        return this.places;
+    }
 
+    @Override
+    public List<Zone> ZONES_LIST() {
+        return this.zones;
+    }
     @Override
     public Map<Integer, IntArrayList> NEXT_EDGES_LIST() {
         return this.nextEdges;
@@ -51,10 +63,6 @@ public class NormalGraph implements Graph {
         return this.prevEdges;
     }
 
-    @Override
-    public List<Place> PLACES_LIST() {
-        return this.places;
-    }
 
     @Override
     public AtomicInteger getNodeCount() {
@@ -71,10 +79,6 @@ public class NormalGraph implements Graph {
         return edgeCount;
     }
 
-    @Override
-    public List<Edge> EDGES_LIST(){
-        return this.edges;
-    }
 
 
     @Override
@@ -151,6 +155,11 @@ public class NormalGraph implements Graph {
     @Override
     public void addWay(Way way) {
         ways.add(way);
+    }
+
+    @Override
+    public void addZone(Zone zone) {
+        this.zones.add(zone);
     }
 
     @Override

@@ -36,7 +36,7 @@ public class RoutingEngine {
     public void start() throws Exception {
         this.graph = graphLoader.loadGraph();
 
-        System.out.println(1);
+        System.out.println(this.graph.ZONES_LIST().get(7).getPoints().size());
         KDTree kdTree = new KDTree(graph);
         kdTree.init();
 
