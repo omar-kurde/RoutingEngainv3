@@ -14,8 +14,8 @@ import org.example.ServiceResponse.RoutingPath;
 public class RoutingService {
     private Routing routing;
     private MapMatchingService mapMatchingService;
-    private Graph graph ;
-    public RoutingService( MapMatchingService mapMatchingService , Graph graph) {
+    private Graph graph;
+    public RoutingService(MapMatchingService mapMatchingService ,Graph graph) {
         this.routing = new DijkstraRouting();
         this.mapMatchingService = mapMatchingService;
         this.graph = graph;

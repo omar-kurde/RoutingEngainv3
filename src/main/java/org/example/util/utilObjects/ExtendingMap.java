@@ -25,133 +25,97 @@ public class ExtendingMap<K, V> extends AbstractMap<K, V> {
         this.merger = merger;
     }
 
+    // =========================
+    // READ (merge both)
+    // =========================
     @Override
     public V get(Object key) {
 
-        boolean inFirst = firstPart.containsKey(key);
-        boolean inSecond = secondPart.containsKey(key);
+        V base = firstPart.get(key);
+        V update = secondPart.get(key);
 
-        if (inFirst && inSecond) {
-            return merger.apply(
-                    firstPart.get(key),
-                    secondPart.get(key)
-            );
+        if (base != null && update != null) {
+            return merger.apply(base, update);
         }
 
-        if (inFirst) {
-            return firstPart.get(key);
-        }
-
-        return secondPart.get(key);
+        return base != null ? base : update;
     }
+
 
     @Override
     public V getOrDefault(Object key, V defaultValue) {
-
-        V value = get(key);
-
-        return value != null
-                ? value
-                : defaultValue;
+        return secondPart.getOrDefault(key, defaultValue);
     }
 
+    // =========================
+    // WRITE (ONLY secondPart)
+    // =========================
     @Override
     public V put(K key, V value) {
-
-        if (firstPart.containsKey(key)) {
-
-            V merged = merger.apply(
-                    firstPart.get(key),
-                    value
-            );
-
-            secondPart.put(key, merged);
-
-            return merged;
-        }
-
         return secondPart.put(key, value);
     }
 
     @Override
     public void putAll(Map<? extends K, ? extends V> m) {
-
-        for (Entry<? extends K, ? extends V> e : m.entrySet()) {
-            put(e.getKey(), e.getValue());
-        }
+        secondPart.putAll(m);
     }
 
-    @Override
-    public V computeIfAbsent(
-            K key,
-            Function<? super K, ? extends V> mappingFunction
-    ) {
 
-        if (containsKey(key)) {
-            return get(key);
-        }
-
-        V value = mappingFunction.apply(key);
-
-        secondPart.put(key, value);
-
-        return value;
-    }
-
+    // =========================
+    // DELETE (only secondPart)
+    // =========================
     @Override
     public V remove(Object key) {
-
         return secondPart.remove(key);
     }
 
     @Override
     public void clear() {
-
         secondPart.clear();
     }
 
+    // =========================
+    // CHECKS
+    // =========================
     @Override
     public boolean containsKey(Object key) {
-
-        return firstPart.containsKey(key)
-                || secondPart.containsKey(key);
+        return secondPart.containsKey(key);
     }
 
     @Override
     public boolean containsValue(Object value) {
-
         return values().contains(value);
     }
 
+    // =========================
+    // SIZE (merged keys)
+    // =========================
     @Override
     public int size() {
-
         Set<K> keys = new HashSet<>();
-
         keys.addAll(firstPart.keySet());
         keys.addAll(secondPart.keySet());
-
         return keys.size();
     }
 
     @Override
     public boolean isEmpty() {
-
-        return firstPart.isEmpty()
-                && secondPart.isEmpty();
+        return firstPart.isEmpty() && secondPart.isEmpty();
     }
 
+    // =========================
+    // VIEW (merged read-only)
+    // =========================
     @Override
     public Set<Entry<K, V>> entrySet() {
 
         Map<K, V> merged = new HashMap<>();
 
-        Set<K> keys = new HashSet<>();
+        for (K key : firstPart.keySet()) {
+            merged.put(key, get(key));
+        }
 
-        keys.addAll(firstPart.keySet());
-        keys.addAll(secondPart.keySet());
-
-        for (K key : keys) {
+        for (K key : secondPart.keySet()) {
             merged.put(key, get(key));
         }
 

@@ -39,11 +39,13 @@ public class TempGraph implements Graph {
             merged.addAll(list2);
             return  merged;
         });
+
         virtualPrevEdges = new ExtendingMap<>(graph.PREV_EDGES_LIST() , (list1, list2) -> {
             IntArrayList merged = new IntArrayList(list1);
             merged.addAll(list2);
             return  merged;
         });
+
         nodeCount = new AtomicInteger(graph.getNodeCount().get());
         wayCount = new AtomicInteger(graph.getWayCount().get());
         edgeCount = new AtomicInteger(graph.getEdgeCount().get());
@@ -187,12 +189,18 @@ public class TempGraph implements Graph {
 
     @Override
     public void addOutEdge(int nodeId, int edgeId) {
-        this.virtualNextEdges.computeIfAbsent(nodeId, k->new IntArrayList()).add(edgeId);
+        if (!virtualNextEdges.containsKey(nodeId)) {
+            this.virtualNextEdges.put(nodeId, new IntArrayList());
+        }
+        this.virtualNextEdges.getOrDefault(nodeId , new IntArrayList()).add(edgeId);
     }
 
     @Override
     public void addInEdge(int nodeId, int edgeId) {
-        this.virtualPrevEdges.computeIfAbsent(nodeId, k->new IntArrayList()).add(edgeId);
+        if (!virtualPrevEdges.containsKey(nodeId)) {
+            this.virtualPrevEdges.put(nodeId, new IntArrayList());
+        }
+        this.virtualPrevEdges.getOrDefault(nodeId , new IntArrayList()).add(edgeId);
     }
 
 

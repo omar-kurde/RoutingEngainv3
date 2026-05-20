@@ -27,7 +27,6 @@ public class ExtendingList<E> extends AbstractList<E> {
         if (index < firstPart.size()) {
             return firstPart.get(index);
         }
-        System.out.println(index-firstPart.size());
         return secondPart.get(index-firstPart.size());
     }
 }
