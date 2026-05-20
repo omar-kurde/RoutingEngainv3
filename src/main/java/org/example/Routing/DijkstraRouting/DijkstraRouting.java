@@ -48,10 +48,6 @@ public class DijkstraRouting implements Routing {
             }
         }
         RoutingPath path = new RoutingPath();
-
-//        System.out.println(sorces);
-//        System.out.println(target);
-//        System.out.println(distances.size());
         path.setDistance(distances.get(target));
         int id=target;
         Node targetNode = graph.getNode(id);
@@ -65,6 +61,7 @@ public class DijkstraRouting implements Routing {
         for (PathNode pathNode : path.getPathNodes()) {
             pathNode.setOrder(count++);
         }
+        System.out.println(path);
 
 
         return path;
