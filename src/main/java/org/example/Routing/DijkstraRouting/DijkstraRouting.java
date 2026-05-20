@@ -13,6 +13,9 @@ public class DijkstraRouting implements Routing {
 
     @Override
     public RoutingPath shortestPath(int sorces , int target , Graph graph) {
+        System.out.println("DijkstraRouting.ShortestPath");
+        System.out.println("sorces: " + sorces);
+        System.out.println("target: " + target);
         HashSet<Integer> visited = new HashSet<>();
         HashMap<Integer,Integer> parents = new HashMap<>();
         HashMap<Integer,Double> distances = new HashMap<>();
@@ -28,7 +31,11 @@ public class DijkstraRouting implements Routing {
                 continue;
             }
             visited.add(Current);
+            if (Current == 2928692)
+                System.out.println("omarrr kurde");
+
             if (Current == target) {
+                System.out.println("omarrr kurde");
                 break;
             }
             Double cost = distances.get(Current);
@@ -39,7 +46,7 @@ public class DijkstraRouting implements Routing {
                 if (visited.contains(edge.getTailId())) {
                     continue;
                 }
-                Double NewDistance = cost + edge.getWight();//NextNode.getValue();
+                Double NewDistance = cost + edge.getWight();
                 if (NewDistance < distances.getOrDefault(edge.getTailId() , 1e9)) {
                     distances.put(edge.getTailId(), NewDistance);
                     parents.put(edge.getTailId(), Current);
@@ -61,7 +68,7 @@ public class DijkstraRouting implements Routing {
         for (PathNode pathNode : path.getPathNodes()) {
             pathNode.setOrder(count++);
         }
-        System.out.println(path);
+
 
 
         return path;

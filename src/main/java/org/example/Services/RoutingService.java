@@ -27,7 +27,6 @@ public class RoutingService {
         Graph graph = new TempGraph(this.graph);
         Node startNode = NodeFactory.createVirtualNode(startRes.getEdge() , startRes.getMapPoint() , graph);
         Node endNode = NodeFactory.createVirtualNode(endRes.getEdge() , endRes.getMapPoint() , graph);
-        System.out.println(graph.getNode(endNode.getId()));
         return routing.shortestPath(startNode.getId() , endNode.getId() , graph);
     }
 

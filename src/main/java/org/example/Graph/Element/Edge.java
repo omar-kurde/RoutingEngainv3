@@ -71,6 +71,15 @@ public class Edge {
     public int getWayId(){
         return this.wayId;
     }
+
+    @Override
+    public String toString() {
+        return "Edge{" +
+                "headId=" + headId +
+                ", tailId=" + tailId +
+                '}';
+    }
+
     public double getWight()
     {
 //        if (this.weight==null)

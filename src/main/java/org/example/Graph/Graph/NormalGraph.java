@@ -104,7 +104,7 @@ public class NormalGraph implements Graph {
             return nextnodes;
         }
         for (int edge : this.nextEdges(nodeid)) {
-            nextnodes.add(this.edges.get((int)edge).getTailId());
+            nextnodes.add(this.edges.get(edge).getTailId());
         }
         return nextnodes;
     }
@@ -129,7 +129,7 @@ public class NormalGraph implements Graph {
     }
     @Override
     public Edge getEdge(int id){
-        return edges.get((int)id);
+        return edges.get(id);
     }
 
     @Override

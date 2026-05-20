@@ -45,6 +45,11 @@ public class OsmProcessor {
                 OsmNode node = (OsmNode) container.getEntity();
                 Node newNode = nodeProcessor.process(node ,graph, graph.getNodeCount());
                 nodeOffSet.put(node.getId(), newNode.getId());
+                if (newNode.getId() == 1794269)
+                    System.out.println("---------->1 "+node.getId());
+                if (newNode.getId() == 2928692)
+                    System.out.println("---------->2 "+node.getId());
+
                 placesProcessor.process(newNode , graph);
 
             }

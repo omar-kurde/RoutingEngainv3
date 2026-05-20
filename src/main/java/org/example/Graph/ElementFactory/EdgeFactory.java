@@ -9,22 +9,7 @@ import org.example.util.Math.Geo;
 
 public class EdgeFactory {
 
-//    public Edge createEdge() {
-//
-//        Edge newEdge = new Edge.Builder()
-//                .id(counter.getAndIncrement())
-//                .wayId(way.getID())
-//                .HeadId(source.getID())
-//                .tailId(target.getID())
-//                .weight(getCost(source , target))
-//                .isHighWay(way.isHighWay())
-//                .oneWay(way.isOneWay())
-//                .build();
-//
-//        graph.addEdge(newEdge);
-//
-//        return newEdge;
-//    }
+
 
     private static double getCost(Node source  , Node target){
         double lat1 = source.getLat();
@@ -54,7 +39,6 @@ public class EdgeFactory {
                .weight(getCost(edgeEndNode , node))
                .build();
        graph.addEdge(newEdge);
-//       node.addOutEdge(newEdge.getId());
        graph.addOutEdge(node.getId() , newEdge.getId());
        graph.addInEdge(edgeEndNode.getId() , newEdge.getId());
     }
@@ -70,7 +54,6 @@ public class EdgeFactory {
                 .weight(getCost(edgeStartNode , node))
                 .build();
         graph.addEdge(newEdge);
-//        node.addOutEdge(newEdge.getId());
         graph.addOutEdge(node.getId() , newEdge.getId());
         graph.addInEdge(edgeStartNode.getId() , newEdge.getId());
 

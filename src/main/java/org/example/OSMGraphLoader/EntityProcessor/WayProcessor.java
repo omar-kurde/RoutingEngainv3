@@ -4,6 +4,7 @@ import com.slimjars.dist.gnu.trove.list.TLongList;
 import com.slimjars.dist.gnu.trove.list.array.TLongArrayList;
 import de.topobyte.osm4j.core.model.iface.OsmWay;
 import de.topobyte.osm4j.core.model.util.OsmModelUtil;
+import org.example.Graph.Element.ElementUtils.RoadTypes;
 import org.example.Graph.Element.Way;
 import org.example.Graph.Graph.Graph;
 
@@ -15,12 +16,12 @@ public class WayProcessor {
         TLongList TempList   = new TLongArrayList(OsmModelUtil.nodesAsList(way));
 
         Map<String,String> tempTags  = OsmModelUtil.getTagsAsMap(way);
-        boolean isHighway = tempTags.containsKey("highway");
+        boolean isHighway = tempTags.containsKey("highway") && RoadTypes.DRIVABLE_HIGHWAYS.contains(tempTags.get("highway"));
         boolean isOneWay = this.IsOneWay(way);
         Way newWay = new Way.Builder()
                 .id(counter.get())
                 .tags(OsmModelUtil.getTagsAsMap(way))
-                .isHighWay(OsmModelUtil.getTagsAsMap(way).containsKey("highway"))
+                .isHighWay(isHighway)
                 .oneWay(isOneWay)
                 .build();
 

@@ -12,6 +12,16 @@ public class Node {
     private boolean onWay = false;
 
 
+    @Override
+    public String toString() {
+        return "Node{" +
+                "id=" + id +
+                ", point=" + point +
+                ", tags=" + tags +
+                ", onWay=" + onWay +
+                '}';
+    }
+
     private Node(Builder builder){
         this.id = builder.id;
 //        this.Lat = builder.Lat;

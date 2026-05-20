@@ -7,6 +7,7 @@ import org.example.util.utilObjects.ExtendingList;
 import org.example.util.utilObjects.ExtendingMap;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -33,8 +34,16 @@ public class TempGraph implements Graph {
         places = new ExtendingList<>(graph.PLACES_LIST());
         zones = new ExtendingList<>(graph.ZONES_LIST());
 
-        virtualNextEdges = new ExtendingMap<>(graph.NEXT_EDGES_LIST());
-        virtualPrevEdges = new ExtendingMap<>(graph.PREV_EDGES_LIST());
+        virtualNextEdges = new ExtendingMap<>(graph.NEXT_EDGES_LIST() , (list1, list2) -> {
+            IntArrayList merged = new IntArrayList(list1);
+            merged.addAll(list2);
+            return  merged;
+        });
+        virtualPrevEdges = new ExtendingMap<>(graph.PREV_EDGES_LIST() , (list1, list2) -> {
+            IntArrayList merged = new IntArrayList(list1);
+            merged.addAll(list2);
+            return  merged;
+        });
         nodeCount = new AtomicInteger(graph.getNodeCount().get());
         wayCount = new AtomicInteger(graph.getWayCount().get());
         edgeCount = new AtomicInteger(graph.getEdgeCount().get());
@@ -97,7 +106,7 @@ public class TempGraph implements Graph {
             return new IntArrayList();
         }
 //        int index = nodeId.intValue();
-        return this.virtualPrevEdges.getOrDefault(nodeId , new IntArrayList());
+        return this.virtualPrevEdges.get(nodeId);
 //        return nodes.get(index).getInEdges();
     }
 
@@ -107,7 +116,7 @@ public class TempGraph implements Graph {
             return new IntArrayList();
         }
 //        int index = nodeId.intValue();
-        return this.virtualNextEdges.getOrDefault(nodeId , new IntArrayList());
+        return this.virtualNextEdges.get(nodeId);
 //        return nodes.get(index).getOutEdges();
     }
 
@@ -119,7 +128,7 @@ public class TempGraph implements Graph {
             return nextnodes;
         }
         for (int edge : this.nextEdges(nodeId)) {
-            nextnodes.add(this.edges.get((int)edge).getTailId());
+            nextnodes.add(this.edges.get(edge).getTailId());
         }
         return nextnodes;
     }

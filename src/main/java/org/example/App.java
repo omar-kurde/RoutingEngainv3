@@ -5,9 +5,10 @@ package org.example;
 public class App 
 {
     public static void main( String[] args ) throws Exception {
-//        RoutingEngine engine = new RoutingEngine();
-//        engine.start();
+        RoutingEngine engine = new RoutingEngine();
+        engine.start();
 
-//        engine.shortestRoute(32.56283601898846,35.84117852688106,32.5036258,35.8758563);
+
+        engine.shortestRoute(32.562859005485464,35.841388462121806,32.57001089999999,35.844161311111115);
     }
 }
