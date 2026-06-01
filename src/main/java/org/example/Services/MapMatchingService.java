@@ -26,7 +26,8 @@ public class MapMatchingService {
         result.setRealPoint(point);
         Point matchedPoint = Projection.closestPointOnLine(graph.getNode(edge.getHeadId()) , graph.getNode(edge.getTailId()) , point);
         result.setMapPoint(matchedPoint);
-       return result;
+        result.setWayTags(graph.getWay(edge.getWayId()).getTags());
+        return result;
     }
 
 }

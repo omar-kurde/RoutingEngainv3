@@ -2,6 +2,7 @@ package org.example.Graph.Element;
 
 import org.example.Graph.Element.ElementUtils.SpatialObjectUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Zone {
@@ -9,12 +10,13 @@ public class Zone {
     private List<Point> points;
     private Point center;
     private String name;
-    private int parentId;
+    private int parentId = 0;
     private List<Zone> subZones;
     public Zone(List<Point> points, String name , Point center) {
         this.points = points;
         this.name = name;
         this.center = center;
+        subZones = new ArrayList<Zone>();
     }
 
 
@@ -56,5 +58,14 @@ public class Zone {
 
     public void setSubZones(List<Zone> subZones) {
         this.subZones = subZones;
+    }
+
+    @Override
+    public String toString() {
+        return "Zone{" +
+                "name='" + name + '\'' +
+                ", center=" + center +
+                ", parentId=" + parentId +
+                '}';
     }
 }

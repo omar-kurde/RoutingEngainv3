@@ -27,7 +27,7 @@ public class RawZoneProcessor {
             else if (member.getType() == EntityType.Way){
                 ways.add(waysOfSet.get(member.getId()));
             }
-            else if (member.getId() == AllowedZones.getMain() && member.getType() == EntityType.Relation){
+            else if (relation.getId() == AllowedZones.getMain() && member.getType() == EntityType.Relation){
                 subRelation.add(relationOffSet.getAndAdd(member.getId()));
             }
         }

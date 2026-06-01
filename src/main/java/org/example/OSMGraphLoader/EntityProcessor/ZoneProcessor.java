@@ -33,7 +33,6 @@ public class ZoneProcessor {
                 points.add(graph.getNode(nodeId).getPoint());
             }
         }
-
         Zone zone = new Zone(points , rawZone.getName() , node.getPoint());
         return zone;
     }

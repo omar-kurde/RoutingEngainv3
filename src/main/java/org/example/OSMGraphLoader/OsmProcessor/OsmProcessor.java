@@ -69,8 +69,6 @@ public class OsmProcessor {
             }
         }
         zoneProcessor.process(rawZones , graph);
-
         nodeOffSet = null;
-        System.out.println("Number of nodes: " + graph.getNodeCount().get());
     }
 }

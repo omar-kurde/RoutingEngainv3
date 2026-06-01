@@ -8,7 +8,9 @@ import java.util.Map;
 public class Way {
     private  int id;
     private final IntArrayList nodes = new IntArrayList();
-//    private final List<long> myEdges = new ArrayList<>();
+
+
+    //    private final List<long> myEdges = new ArrayList<>();
     private Map<String,String> tags;
     private final boolean oneWay;
     private final boolean isHighWay;
@@ -25,6 +27,13 @@ public class Way {
         this.id = id;
     }
 
+    public Map<String, String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Map<String, String> tags) {
+        this.tags = tags;
+    }
     public static class Builder {
         private int id;
         private Map<String,String> tags;

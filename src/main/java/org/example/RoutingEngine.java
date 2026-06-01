@@ -1,9 +1,6 @@
 package org.example;
 
-import org.example.Graph.Element.Edge;
-import org.example.Graph.Element.Node;
-import org.example.Graph.Element.PlaceCategory;
-import org.example.Graph.Element.Point;
+import org.example.Graph.Element.*;
 import org.example.Graph.Graph.Graph;
 import org.example.MapMatching.KdTree.KDTree;
 import org.example.MapMatching.MapMatching;
@@ -40,11 +37,9 @@ public class RoutingEngine {
         KDTree kdTree = new KDTree(graph);
         kdTree.init();
 
-        System.out.println(2);
 
         Rtree rtree = new Rtree(graph);
         rtree.init();
-        System.out.println(3);
 
         this.placeService = new PlaceService(RESOLUTION , K);
         placeService.addPlaces(graph.PLACES_LIST());
@@ -53,6 +48,7 @@ public class RoutingEngine {
         mapMatchingService = new MapMatchingService(graph, mapMatchingStrategy);
 
         this.routingService = new RoutingService(mapMatchingService , graph);
+        System.out.println(graph.ZONES_LIST());
     }
 
     public RoutingPath shortestRoute(double startLat, double startLon , double endLat, double endLon) {
@@ -65,9 +61,23 @@ public class RoutingEngine {
     public Node MatchToNode(double lat ,double lon) {
         return mapMatchingService.MatchToNode(new Point(lat , lon));
     }
+
     public MapMatchingResult MatchToEdge(double lat ,double lon) {
         return mapMatchingService.MatchToEdge(new Point(lat , lon));
     }
+
+    public Zone getZone(String name) {
+        for (Zone zone : graph.ZONES_LIST()) {
+            if (zone.getName().equals(name)) {
+                return zone;
+            }
+        }
+        return null;
+    }
+    public List<Zone> getAllZones() {
+        return graph.ZONES_LIST();
+    }
+
 }
 
 
